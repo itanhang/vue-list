@@ -6,4 +6,4 @@
 # Shopping Cart
 `vue2.0` `vue-resource`
 
-[Source](https://github.com/itanhang/vue-list/tree/master/shopping-cart) / [Demo](https://itanhang.github.io/vue-list/shopping-cart/index.html)
+[Source](https://github.com/itanhang/vue-list/tree/master/shopping-cart) /  [Demo](https://itanhang.github.io/vue-list/shopping-cart/index.html)
