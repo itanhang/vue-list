@@ -1,0 +1,33 @@
+{
+    "status": 1,
+    "result": {
+        "totalMoney": 0,
+        "list": [
+            {
+                "id": "1",
+                "name": "Apple iPhone 6s Plus",
+                "price": 2600,
+                "quentity": 1,
+                "album": "static/images/1.jpg",
+                "spec": "32G 玫瑰金色",
+                "checked": true
+            },
+            {
+                "id": "2",
+                "name": "HUAWEI nova 2",
+                "price": 2499,
+                "quentity": 1,
+                "album": "static/images/2.jpg",
+                "spec": "4GB+64GB 玫瑰金"
+            },
+            {
+                "id": "3",
+                "name": "vivo X9",
+                "price": 2398,
+                "quentity": 1,
+                "album": "static/images/3.jpg",
+                "spec": "4GB+64GB 活力蓝"
+            }
+        ]
+    }
+}

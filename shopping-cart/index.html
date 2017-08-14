@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue2.0实现购物车功能</title>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="static/css/modal.css">
+</head>
+<body>
+    <div id="cart" class="container">
+        <div class="cart-head">
+            <h3><i class="iconfont">&#xe63f;</i>购物车</h3>
+            <a href="javascript:;" class="user">
+                <i class="iconfont">&#xe6b8;</i>
+                <span>tanhang@outlook.com</span>
+            </a>
+        </div>
+
+        <div class="cart-item box-shadow">
+            <div class="thead">
+                <div class="col">商品信息</div>
+                <div class="col">单价</div>
+                <div class="col">数量</div>
+                <div class="col">金额</div>
+                <div class="col">删除</div>
+            </div>
+            <!-- start [购物车商品] -->
+            <div class="tbody">
+                
+                <div class="row" v-for="(item,index) in productList" v-bind:class="{'last': index + 1 == productList.length}">
+                    <div class="col">
+                        <label class="item-check">
+                            <input type="checkbox" v-bind:value="item.id" v-bind:checked="item.checked" v-on:click="checkProduct(item, $event)">
+                        </label>
+                    </div>
+                    <div class="col">
+                        <div class="p-img"><a href="javascript:;"><img v-bind:src="item.album" v-bind:alt="item.name" width="80" height="80"></a></div>
+                        <div class="p-info">
+                            <h6 class="name"><a href="javascript:;">{{item.name}}</a></h6>
+                            <p class="other"><b>规格：</b>{{item.spec}}</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="p-price">{{item.price | formatMoney(0)}}</div>
+                    </div>
+                    <div class="col">
+                        <div class="p-quantity">
+                            <div class="box">
+                                <a href="javascript:;" v-on:click="changeQuentity(item,-1)"><i>-</i></a>
+                                <input type="text" v-model="item.quentity" disabled>
+                                <a href="javascript:;" v-on:click="changeQuentity(item,1)"><i>+</i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="p-total-price">{{item.quentity * item.price | formatMoney(0)}}</div>
+                    </div>
+                    <div class="col">
+                        <div class="p-delete"><a href="javascript:;" v-on:click="checkDel(index)"><i class="iconfont">&#xe645;</i></a></div>
+                    </div>
+                </div>
+                
+                <p class="cart-empty" v-if="productList.length < 1">购物车为空！<a href="#">去添加商品</a></p>
+
+            </div>
+            <!-- end -->
+            <div class="tfoot">
+                <div class="foot-left">
+                    <label for="checkAll" v-bind:class="{'checked': isCheckAll}"><input type="checkbox" id="checkAll" v-bind:checked="isCheckAll" v-on:change="checkAll(true)"> 全选</label>
+                    <label v-on:click="checkAll(false)">取消</label>
+                </div>
+                <div class="foot-right">
+                    <div class="item-total">
+                        总金额：<span class="total-price">{{totalMoney | formatMoney}}</span>
+                    </div>
+                    <div class="next-btn-wrap">
+                        <a href="javascript:;" class="btn btn-radius btn-simple" v-on:click.once="checkout($event)"><i class="iconfont">&#xe7bb;</i>结 账</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="md-modal modal-msg md-modal-transition" id="showModal" v-bind:class="{'md-show': mdShow}">
+            <div class="md-modal-inner">
+                <div class="md-top">
+                    <button class="md-close" v-on:click="mdShow=false">关闭</button>
+                </div>
+                <div class="md-content">
+                    <div class="confirm-tips">
+                        <p id="cusLanInfo">你确认删除此订单信息吗?</p>
+                    </div>
+                    <div class="btn-wrap col-2">
+                        <button class="btn btn--m" id="btnModalConfirm" v-on:click="confirmDel()">Yes</button>
+                        <button class="btn btn--m" id="btnModalCancel" v-on:click="mdShow=false">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="md-overlay" id="showOverLay" v-if="mdShow"></div>
+
+    </div>
+    <script src="static/js/lib/vue.js"></script>
+    <script src="static/js/lib/vue-resource.min.js"></script>
+    <script src="static/js/cart.js"></script>
+</body>
+</html>
