@@ -1,6 +1,6 @@
 # todo
 
-[Demo](https://itanhang.github.io/vue-list/todo/dist)
+[Demo](https://itanhang.github.io/vue-list/todo/dist/index.html)
 
 ## Build Setup
 
